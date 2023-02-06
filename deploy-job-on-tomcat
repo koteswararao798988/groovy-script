@@ -1,0 +1,13 @@
+pipeline {
+    agent any
+    stages{
+        stage("deploy"){
+
+            steps{
+                sshagent(['ea7f8b18-c405-433d-9919-408387e7a302']) {
+                    sh"scp -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/build-job/webapp/target/webapp-2.war ec2-user@3.16.66.32:/home/ec2-user/apache-tomcat-8.5.85/webapps"
+               }
+            }
+        }
+    }
+}
